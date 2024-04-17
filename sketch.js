@@ -278,4 +278,16 @@ function mouseClicked() {
   touchStarted();
 }
 
+
+function keyPressed() {
+  // this will download the first 25 seconds of the animation!
+  //if (key === 'g') {
+  //  saveGif('reflection.gif', 15);
+ // }
+  if (key === 's') {
+    saveCanvas('parkingDrop', 'jpg');
+  }
+  
+}
+
  
