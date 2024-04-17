@@ -9,6 +9,7 @@ let wrn
 let vScale;
 // Load the imacnvet
 let tiles = [];
+let tilesst = [];
 let board = [];
 let col = 20;
 let row = 10; // but they are twice as big
@@ -16,8 +17,13 @@ let output;
 let cnv;
 let lasttouch = 0;
 let mix = false;
+let startimg
+let img3
 
- 
+function preload() {
+  img3 = loadImage("jin2.png");
+}
+
 
 function setup() {
   print("behi", img)
@@ -40,6 +46,12 @@ function setup() {
   // Resize the image 
   // at this level each pixel is two by two to screen
   //img.resize(400,400);
+  img3.resize(800, 840);
+
+  // start make list
+  makeliststart();
+
+  doit();
   
 
 
@@ -138,6 +150,7 @@ function doit() {
 
 
 function makelist() {
+  tiles = []
   let index = 0;
   for (let y = 0; y < row * 2; y += 2) {
     // goes up by two becassue its twice as big
@@ -161,8 +174,34 @@ function makelist() {
   }
 }
 
+
+function makeliststart() {
+  let index = 0;
+  for (let y = 0; y < row * 2; y += 2) {
+    // goes up by two becassue its twice as big
+    // for each y there are some x's
+    for (let x = 0; x < 20; x++) {
+      noFill();
+      stroke(0);
+      if (x % 2 == 0) {
+        let imgpt = img3.get(x * vScale, y * vScale, vScale, vScale * 2);
+        board.push(index);
+        let tile = new Tile(index, imgpt);
+        tiles.push(tile);
+      } else {
+        let imgpt = img3.get(x * vScale, (y + 1) * vScale, vScale, vScale * 2);
+        board.push(index);
+        let tile = new Tile(index, imgpt);
+        tiles.push(tile);
+      }
+      index++;
+    }
+  }
+}
+
 function s2() {
   // shows the tile index
+  background(55)
   let index = 0;
   for (let y = 0; y < row * 2; y += 2) {
     // goes up by two because its twice as big
@@ -194,6 +233,7 @@ function s2() {
 }
 
 function s3() {
+  background(55)
   let index = 0;
   for (let y = 0; y < row * 2; y += 2) {
     // goes up by two because its twice as big
