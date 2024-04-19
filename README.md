@@ -1,8 +1,8 @@
-# Pixel sorting using the p5js pixel array
+# parkingDrop
 
-I took algorithm inspiration from this post
+An way to take images turn it into bricks
 
-https://happycoding.io/tutorials/p5js/images/pixel-sorter
+then rearrange bricks according to fisher yates algorithm
 
 but I used the pixel array in order to try and get a performance improvement
 
