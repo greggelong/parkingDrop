@@ -2,10 +2,10 @@ let img;
 let cvn;
 let inst;
 let msg;
-let gotit =false;
-let img2
+let gotit = false;
+let img2;
 let osc; // off screen canvas
-let wrn 
+let wrn;
 let vScale;
 // Load the imacnvet
 let tiles = [];
@@ -17,33 +17,32 @@ let output;
 let cnv;
 let lasttouch = 0;
 let mix = false;
-let startimg
-let img3
+let startimg;
+let img3;
 
 function preload() {
   img3 = loadImage("jin2.png");
 }
 
-
 function setup() {
-  print("behi", img)
+  print("behi", img);
   cvn = createCanvas(800, 840);
-  cvn.parent('sketch-holder')
-  let cx = windowWidth/2-cvn.width/2
-  let cy = windowHeight/2-cvn.height/2
+  cvn.parent("sketch-holder");
+  let cx = windowWidth / 2 - cvn.width / 2;
+  let cy = windowHeight / 2 - cvn.height / 2;
   //cvn.position(cx,cy)
-  wrn = select("#out")
-  wrn.html("Drag and Drop an Image")
-  background(255)
+  wrn = select("#out");
+  wrn.html("Drag and Drop an Image");
+  background(255);
   //inst = createP("Click and hold the mouse button to sort!")
-  wrn.style("color","red")
+  wrn.style("color", "red");
   pixelDensity(1);
-   
-  cvn.drop(handleFile,handleDrop)
+
+  cvn.drop(handleFile, handleDrop);
   vScale = 40;
   //img2 = createImage(400,400)
 
-  // Resize the image 
+  // Resize the image
   // at this level each pixel is two by two to screen
   //img.resize(400,400);
   img3.resize(800, 840);
@@ -52,55 +51,53 @@ function setup() {
   makeliststart();
 
   doit();
-  
-
 
   noSmooth(); // keeps it crisp
   //image(img, 0, 0, width, height);
-  print("hi")
+  print("hi");
 }
 async function handleFile(file) {
   // Remove the current image, if any.
   if (img) {
     img.remove();
-    print("this is it",img)
-    
+    print("this is it", img);
+
     //osc.clear()
   }
-   // is the problem a-sync******
+  // is the problem a-sync******
   // Create an  element with the
   // dropped file.
-  img = await createImg(file.data, '');
+  img = await createImg(file.data, "");
   //img.hide();
-  if(img.width >0 || img.height>0){
-  osc = createGraphics(img.width,img.height)
+  if (img.width > 0 || img.height > 0) {
+    osc = createGraphics(img.width, img.height);
 
-   osc.drawingContext.drawImage(img.elt,0,0)
-  //img.hide();
+    osc.drawingContext.drawImage(img.elt, 0, 0);
+    //img.hide();
 
-  img2 = osc.get(0,0,osc.width,osc.height)
-  img2.resize(800,840)
+    img2 = osc.get(0, 0, osc.width, osc.height);
+    img2.resize(800, 840);
 
-  // Draw the image.
-  img.hide()
-  makelist();
-  doit()
-  //image(img2,width/2,height/2)
-  gotit=true;
-  print(gotit)
-  sort = false // so it doest start sorting right away
-  wrn.html("Clicking the Mouse toggles sorting")
-  }else{
-    img.hide()
-    gotit=false
-    print("try again")
-    wrn.html("SORRY: Try to place the image AGAIN")
+    // Draw the image.
+    img.hide();
+    makelist();
+    doit();
+    //image(img2,width/2,height/2)
+    gotit = true;
+    print(gotit);
+    sort = false; // so it doest start sorting right away
+    wrn.html("Clicking the Mouse toggles sorting");
+  } else {
+    img.hide();
+    gotit = false;
+    print("try again");
+    wrn.html("SORRY: Try to place the image AGAIN");
     sort = false;
   }
 }
 
 function handleDrop(event) {
-  gotit =false
+  gotit = false;
   // Remove current paragraph, if any.
   //if (msg) {
   //  msg.remove();
@@ -121,8 +118,6 @@ function handleDrop(event) {
   // msg.style('color', c);
   // msg.style('font-size', '12px');
 }
-
- 
 
 function doit() {
   let newmap = "Mapping: ";
@@ -148,9 +143,9 @@ function doit() {
   //output.html(newmap);
 }
 
-
 function makelist() {
-  tiles = []
+  tiles = [];
+  board = []; // needed to clear board and indexes were repeated
   let index = 0;
   for (let y = 0; y < row * 2; y += 2) {
     // goes up by two becassue its twice as big
@@ -173,7 +168,6 @@ function makelist() {
     }
   }
 }
-
 
 function makeliststart() {
   let index = 0;
@@ -201,7 +195,7 @@ function makeliststart() {
 
 function s2() {
   // shows the tile index
-  background(55)
+  background(55);
   let index = 0;
   for (let y = 0; y < row * 2; y += 2) {
     // goes up by two because its twice as big
@@ -233,7 +227,7 @@ function s2() {
 }
 
 function s3() {
-  background(55)
+  background(55);
   let index = 0;
   for (let y = 0; y < row * 2; y += 2) {
     // goes up by two because its twice as big
@@ -254,7 +248,6 @@ function s3() {
     }
   }
 }
-
 
 function touchStarted() {
   const currenttime = millis();
@@ -278,16 +271,12 @@ function mouseClicked() {
   touchStarted();
 }
 
-
 function keyPressed() {
   // this will download the first 25 seconds of the animation!
   //if (key === 'g') {
   //  saveGif('reflection.gif', 15);
- // }
-  if (key === 's') {
-    saveCanvas('parkingDrop', 'jpg');
+  // }
+  if (key === "s") {
+    saveCanvas("parkingDrop", "jpg");
   }
-  
 }
-
- 
